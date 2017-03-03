@@ -8,9 +8,10 @@
   </head>
   <body>
     <div class="container">
-      <%= content_tag :div, flash[:error], class: 'alert alert-error' if flash[:error] %>
-      <%= content_tag :div, flash[:alert], class: 'alert alert-warning' if flash[:alert] %>
-      <%= content_tag :div, flash[:notice], class: 'alert alert-info' if flash[:notice] %>
+      <% flash.each do |type, message| %>
+        <%= content_tag :div, message, class: 'alert alert-' + flash_bootstrap_class(type) %>
+      <% end %>
+
       <%= yield %>
     </div>
   </body>
