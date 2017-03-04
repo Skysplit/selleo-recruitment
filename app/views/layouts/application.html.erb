@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RecruitmentWebApp</title>
+    <title>Recuruitment Web App</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <div class="container">
+      <% flash.each do |type, message| %>
+        <%= content_tag :div, message, class: 'alert alert-' + flash_bootstrap_class(type) %>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
