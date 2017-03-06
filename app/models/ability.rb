@@ -8,9 +8,7 @@ class Ability
 
     if user.admin?
       can :crud, :all
-      cannot :destroy, User do |other_user|
-        user.id == other_user.id
-      end
+      cannot :destroy, User, id: user.id
     end
   end
 end
