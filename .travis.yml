@@ -1,0 +1,14 @@
+language: ruby
+cache: bundler
+rvm:
+    - 2.4.0
+    - 2.3.3
+    - 2.2.6
+services:
+    - mysql
+before_install:
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS myapp_test'
+    - cp config/database.yml.example config/database.yml
+script:
+    - bundle exec rake db:setup
+    - bundle exec rake spec
