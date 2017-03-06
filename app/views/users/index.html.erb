@@ -3,18 +3,13 @@
     <tr>
       <th>#</th>
       <th>Email</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Points of Interest</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td>
-        <%= user.id %>
-      </td>
-      <td>
-        <%= user.email %>
-      </td>
-    </tr>
-    <% end %>
+    <%= render partial: 'users/index/row', collection: @users, as: :user %>
   </tbody>
 </table>

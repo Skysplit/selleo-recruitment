@@ -1,0 +1,27 @@
+<tr>
+  <td>
+    <%= user.id %>
+  </td>
+  <td>
+    <%= user.email %>
+  </td>
+  <td>
+    <%= user.gender.capitalize %>
+  </td>
+  <td>
+    <%= 'Unknown' if user.age.nil? %>
+    <%= user.age %>
+  </td>
+  <td>
+    <%= user.interests.map { |interest| interest.name }.join ', ' %>
+  </td>
+  <td>
+    <% if can? :destroy, user %>
+      <%= form_for user, method: :delete do |f| %>
+       <%= button_tag type: 'submit', class: 'btn btn-danger', data: { confirm: "Are you sure you want to delete user #{user.email}" } do %>
+        <i class="fa fa-trash"></i>
+       <% end %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>
