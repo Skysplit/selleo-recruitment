@@ -48,7 +48,7 @@ RSpec.describe UsersController, type: :controller do
         sign_in jon
         delete :destroy, params: { id: jane.id }
         expect(response).to redirect_to action: 'index'
-        expect(flash[:alert]).to eq 'You are not authorized to access this page.'
+        expect(flash[:alert]).to eq 'You are not allowed to delete users or deleting yourself.'
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe UsersController, type: :controller do
         sign_in @admin
         delete :destroy, params: { id: @admin.id }
         expect(response).to redirect_to action: 'index'
-        expect(flash[:alert]).to eq 'You are not authorized to access this page.'
+        expect(flash[:alert]).to eq 'You are not allowed to delete users or deleting yourself.'
       end
     end
   end

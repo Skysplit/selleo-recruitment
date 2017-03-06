@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @user
+    authorize! :destroy, @user, message: 'You are not allowed to delete users or deleting yourself.'
     @user.destroy
     redirect_to users_url, notice: "Successfully deleted user #{@user.email}"
   end
