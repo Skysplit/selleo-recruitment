@@ -1,6 +1,6 @@
 module ApplicationHelper
   def flash_bootstrap_class(type)
-    case type
+    case type.to_sym
     when :error
       "danger"
     when :alert
