@@ -9,7 +9,7 @@ RSpec.describe Admin::HomeController, type: :controller do
       end
     end
 
-    context "when normal user is sined in" do
+    context "when normal user is signed in" do
       it "should redirect to root url" do
         user = User.create email: 'test@example.com', password: 'test'
         sign_in user
