@@ -18,7 +18,7 @@
   <div class="form-group">
     <%= f.label :gender, class: 'control-label col-md-4' %>
     <div class="col-md-8">
-      <%= f.select :gender, User.genders, {}, { class: 'form-control' } %>
+      <%= f.select :gender, User.genders.keys, {}, { class: 'form-control' } %>
     </div>
   </div>
 
