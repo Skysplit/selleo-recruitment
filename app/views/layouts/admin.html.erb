@@ -12,6 +12,14 @@
   <body>
     <div class="navbar navbar-default">
       <%= link_to 'Admin panel', admin_root_path, class: 'navbar-brand' %>
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to 'Homepage', root_url %>
+        </li>
+        <li>
+          <%= link_to 'Users', admin_users_path %>
+        </li>
+      </ul>
     </div>
     <div class="container">
       <%= render partial: '/flash' %>

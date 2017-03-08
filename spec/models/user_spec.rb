@@ -30,9 +30,9 @@ RSpec.describe User, type: :model do
   describe "interests relation" do
     it "should allow to have many interets" do
       user = User.create email: 'test@example.com', password: 'test'
-      fishing = user.interests.create name: 'test'
-      kayaking = user.interests.create name: 'kayaking'
-      user.reload
+      expect(user.valid?).to eq true
+      fishing = user.interests.create name: 'test', category: :health
+      kayaking = user.interests.create name: 'kayaking', category: :health
       expect(user.interests).to eq [fishing, kayaking]
     end
   end

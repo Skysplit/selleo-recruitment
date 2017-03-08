@@ -9,11 +9,10 @@
     <%= user.gender.capitalize %>
   </td>
   <td>
-    <%= 'Unknown' if user.age.nil? %>
-    <%= user.age %>
+    <%= user.age || 'Unknown' %>
   </td>
   <td>
-    <%= user.interests.map { |interest| interest.name }.join ', ' %>
+    <%= user.interests.map(&:name).join ', ' %>
   </td>
   <td>
     <% if can? :destroy, user %>
