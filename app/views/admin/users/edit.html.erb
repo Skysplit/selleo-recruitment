@@ -1,0 +1,8 @@
+<h1>
+  Edit user
+  <strong>
+    <%= @user.email %>
+  </strong>
+</h1>
+
+<%= render partial: 'form', locals: { resource: @user } %>

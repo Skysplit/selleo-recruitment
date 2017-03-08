@@ -35,6 +35,8 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'cancan'
+gem 'cocoon'
+gem 'email_validator'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

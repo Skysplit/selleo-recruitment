@@ -1,0 +1,42 @@
+<%= render partial: '/errors', locals: { resource: resource } %>
+
+<%= form_for [:admin, resource], html: { class: 'form-horizontal' }  do |f| %>
+  <div class="form-group">
+    <%= f.label :email, class: 'control-label col-md-4' %>
+    <div class="col-md-8">
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :age, class: 'control-label col-md-4' %>
+    <div class="col-md-8">
+      <%= f.number_field :age, class: 'form-control', min: 0, step: 1 %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :gender, class: 'control-label col-md-4' %>
+    <div class="col-md-8">
+      <%= f.select :gender, resource.class.genders.keys.to_a, {}, { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Points of Interest', class: 'control-label col-md-4' %>
+    <div class="col-md-8">
+      <div>
+        <%= f.fields_for :interests do |interest| %>
+          <%= render 'interest_fields', f: interest %>
+        <% end %>
+        <%= link_to_add_association 'Add interest', f, :interests, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-4 col-md-8">
+      <%= f.submit 'Save', class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

@@ -5,11 +5,11 @@ RSpec.describe Admin::HomeController, type: :controller do
     context "when user is signed out" do
       it "should redirect to login page" do
         get :index
-        expect(response).to redirect_to controller: 'devise/sessions', action: 'new'
+        expect(response).to redirect_to new_user_session_url
       end
     end
 
-    context "when normal user is logged in" do
+    context "when normal user is sined in" do
       it "should redirect to root url" do
         user = User.create email: 'test@example.com', password: 'test'
         sign_in user
@@ -19,13 +19,13 @@ RSpec.describe Admin::HomeController, type: :controller do
       end
     end
 
-    context "when admin user is logged in" do
+    context "when admin user is signed in" do
       it "should show admin page" do
         user = User.create email: 'test@example.com', password: 'test', admin: 1
         sign_in user
         get :index
         expect(response.status).to eq 200
-        expect(response).to render_template 'index'
+        expect(response).to render_template :index
       end
     end
   end
