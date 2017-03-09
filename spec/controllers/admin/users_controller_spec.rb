@@ -18,7 +18,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         user = User.create email: 'test@example.com'
         sign_in user
         get :index
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to users_url
         expect(flash[:alert]).to eq 'Thou shalt not pass!'
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         user = User.create email: 'test@example.com'
         sign_in user
         get :new
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to users_url
         expect(flash[:alert]).to eq 'Thou shalt not pass!'
       end
     end
@@ -75,7 +75,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         user = User.create email: 'test@example.com'
         sign_in user
         get :edit, params: { id: @admin.id }
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to users_url
         expect(flash[:alert]).to eq 'Thou shalt not pass!'
       end
     end
@@ -102,7 +102,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         user = User.create email: 'test@example.com'
         sign_in user
         post :create, params: { id: @admin.id }
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to users_url
         expect(flash[:alert]).to eq 'Thou shalt not pass!'
       end
     end
@@ -163,7 +163,7 @@ RSpec.describe Admin::UsersController, type: :controller do
         user = User.create email: 'test@example.com'
         sign_in user
         put :update, params: { id: @admin.id }
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to users_url
         expect(flash[:alert]).to eq 'Thou shalt not pass!'
       end
     end

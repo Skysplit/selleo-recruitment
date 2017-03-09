@@ -4,10 +4,9 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    alias_action :create, :read, :update, :destroy, to: :crud
-
     if user.admin?
-      can :crud, :all
+      can :destroy, :all
+      can :admin, :all
       cannot :destroy, User, id: user.id
     end
   end

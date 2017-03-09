@@ -10,11 +10,11 @@ RSpec.describe Admin::HomeController, type: :controller do
     end
 
     context "when normal user is signed in" do
-      it "should redirect to root url" do
+      it "should redirect to users url" do
         user = User.create email: 'test@example.com', password: 'test'
         sign_in user
         get :index
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to users_url
         expect(flash[:alert]).to eq 'Thou shalt not pass!'
       end
     end
