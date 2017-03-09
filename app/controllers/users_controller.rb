@@ -6,7 +6,19 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.includes(:interests).all
+    @users = User.listing.includes(:interests).all
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        authorize! :admin, User
+        headers = ['id', 'email', 'gender', 'age']
+        values = @users.map { |user| user.slice(*headers).values }
+        send_data CsvHelper.create_csv_string(headers: headers, values: values),
+          filename: 'users.csv',
+          type: 'text/csv'
+      end
+    end
   end
 
   def destroy
@@ -16,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def get_user
     @user = User.find(params[:id])
   end

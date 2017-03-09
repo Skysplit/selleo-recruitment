@@ -15,7 +15,7 @@
         <%= link_to 'Home', root_url, class: 'navbar-brand' %>
         <ul class="nav navbar-nav">
           <% unless current_user.nil? %>
-            <% if current_user.admin? %>
+            <% if can? :admin, User %>
             <li>
               <%= link_to 'Admin panel', admin_root_path %>
             <% end %>

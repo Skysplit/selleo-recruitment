@@ -12,4 +12,16 @@
   <tbody>
     <%= render partial: 'users/index/row', collection: @users, as: :user %>
   </tbody>
+  <% if can? :admin, User %>
+    <tfoot>
+      <tr>
+        <td colspan="6" class="text-right">
+          <%= link_to users_path(format: :csv), class: 'btn btn-success' do %>
+            Export to csv
+            <i class="fa fa-share"></i>
+          <% end %>
+        </td>
+      </tr>
+    </tfoot>
+  <% end %>
 </table>

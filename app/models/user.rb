@@ -11,4 +11,5 @@ class User < ApplicationRecord
   validates :age, numericality: { greather_than: 0, allow_nil: true }
 
   scope :age_between_20_and_30, -> { where age: 20..30 }
+  scope :listing, -> { select :id, :email, :age, :gender }
 end

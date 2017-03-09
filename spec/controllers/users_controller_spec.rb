@@ -9,25 +9,45 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
-    context "when user is signed in" do
+    context "when normal user is signed in" do
+      before :each do
+        @jon = User.create email: 'jon@example.com', age: 22
+        sign_in @jon
+      end
+
       it "should show users listing" do
-        jon = User.create email: 'jon@example.com'
         jane = User.create email: 'jane@example.com'
-        sign_in jon
         get :index
-        expect(assigns :users).to eq [jon, jane]
+        expect(assigns :users).to eq [@jon, jane]
         expect(response).to render_template :index
       end
 
       it "should properly fetch interests" do
-        jon = User.create email: 'jon@example.com'
-        fishing = jon.interests.create name: 'fishing'
-        kayaking = jon.interests.create name: 'kayaking'
-        sign_in jon
+        fishing = @jon.interests.create name: 'fishing'
+        kayaking = @jon.interests.create name: 'kayaking'
         get :index
         users = assigns :users
-        expect(users).to eq [jon]
+        expect(users).to eq [@jon]
         expect(users.first.interests).to eq [fishing, kayaking]
+      end
+
+      it "should redirect to users listing when format: csv" do
+        get :index, params: { format: :csv }
+        expect(response).to redirect_to users_url
+      end
+    end
+
+    context "when admin user is signed in" do
+      it "should download csv file" do
+        user = User.create email: 'test@example.com', age: 41, gender: :female, admin: 1
+        sign_in user
+        get :index, params: { format: :csv }
+        expect(response.headers).to have_key 'Content-Type'
+        expect(response.headers).to have_key 'Content-Disposition'
+        expect(response.headers['Content-Type']).to include 'text/csv'
+        expect(response.body).to include user.email
+        expect(response.body).to include user.age.to_s
+        expect(response.body).to include user.gender
       end
     end
   end
