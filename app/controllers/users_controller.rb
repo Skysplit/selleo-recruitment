@@ -14,7 +14,9 @@ class UsersController < ApplicationController
         authorize! :admin, User
         headers = ['id', 'email', 'gender', 'age']
         values = @users.map { |user| user.slice(*headers).values }
-        send_data CsvHelper.create_csv_string(headers: headers, values: values), filename: 'users.csv', type: 'text/csv'
+        send_data CsvHelper.create_csv_string(headers: headers, values: values),
+          filename: 'users.csv',
+          type: 'text/csv'
       end
     end
   end
@@ -28,6 +30,6 @@ class UsersController < ApplicationController
   private
 
   def get_user
-    @user = User.find params[:id]
+    @user = User.find(params[:id])
   end
 end
