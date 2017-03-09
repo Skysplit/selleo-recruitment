@@ -29,11 +29,18 @@ RSpec.describe User, type: :model do
 
   describe "age between 20 and 30 scope" do
     it "should fetch users with age between 20 and 30 years" do
-      [15, 32, 21, 29, 20, 30].each_with_index do |age, i|
+      [20, 30].each_with_index do |age, i|
         User.create email: "test#{i}@example.com", age: age
       end
 
-      expect(User.age_between_20_and_30.count).to eq 4
+      expect(User.age_between_20_and_30.count).to eq 2
+    end
+    
+    it "should not fetch users with age below 20 and above 30" do
+      [19, 31].each_with_index do |age, i|
+        User.create email: "test#{i}@example.com", age: age
+      end
+      expect(User.age_between_20_and_30.count).to eq 0
     end
   end
 

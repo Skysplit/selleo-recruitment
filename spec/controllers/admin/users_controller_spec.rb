@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :controller do
   before :each do
-    @admin = User.create email: 'admin@example.com', password: 'test', admin: 1
+    @admin = User.create email: 'admin@example.com', password: 'test', admin: true
   end
 
   describe "GET #index" do
