@@ -27,6 +27,23 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "age between 20 and 30 scope" do
+    it "should fetch users with age between 20 and 30 years" do
+      [20, 30].each_with_index do |age, i|
+        User.create email: "test#{i}@example.com", age: age
+      end
+
+      expect(User.age_between_20_and_30.count).to eq 2
+    end
+    
+    it "should not fetch users with age below 20 and above 30" do
+      [19, 31].each_with_index do |age, i|
+        User.create email: "test#{i}@example.com", age: age
+      end
+      expect(User.age_between_20_and_30.count).to eq 0
+    end
+  end
+
   describe "interests relation" do
     it "should allow to have many interets" do
       user = User.create email: 'test@example.com', password: 'test'

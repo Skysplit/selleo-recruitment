@@ -53,7 +53,7 @@ RSpec.describe UsersController, type: :controller do
 
     context "when admin user is signed in" do
       before :each do
-        @admin = User.create email: 'admin@example.com', admin: 1
+        @admin = User.create email: 'admin@example.com', admin: true
         @jon = User.create email: 'jon@example.com'
         sign_in @admin
       end
