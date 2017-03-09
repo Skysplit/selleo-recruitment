@@ -27,6 +27,12 @@ class UsersController < ApplicationController
     redirect_to users_url, notice: "Successfully deleted user #{@user.email}"
   end
 
+  def send_regards
+    user = User.find(params[:id])
+    SendRegardsService.new(UserMailer, current_user, user).call
+    redirect_to users_url, notice: "User #{user.email} received your regards."
+  end
+
   private
 
   def get_user
