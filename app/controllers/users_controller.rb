@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.listing.includes(:interests).all
+    @q = User.ransack(search_params[:q])
+    @users = @q.result.listing.includes(:interests)
 
     respond_to do |format|
       format.html
@@ -37,5 +38,9 @@ class UsersController < ApplicationController
 
   def get_user
     @user = User.find(params[:id])
+  end
+
+  def search_params
+    params.permit(q: [:email_cont, :s])
   end
 end
