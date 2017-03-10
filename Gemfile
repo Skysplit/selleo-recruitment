@@ -37,6 +37,7 @@ gem 'font-awesome-rails'
 gem 'cancan'
 gem 'cocoon'
 gem 'email_validator'
+gem 'ransack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -59,6 +60,7 @@ end
 
 group :test do
   gem 'rails-controller-testing'
+  gem 'capybara'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

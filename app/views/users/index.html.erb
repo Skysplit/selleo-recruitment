@@ -1,12 +1,42 @@
+<%= search_form_for @q, class: 'form-horizontal' do |f| %>
+<div class="form-group">
+  <%= f.label :email_cont, class: 'control-label col-md-2' %>
+  <div class="col-md-10">
+    <div class="input-group">
+      <%= f.search_field :email_cont, class: 'form-control' %>
+      <div class="input-group-btn">
+        <%= f.button class: 'btn  btn-default' do %>
+          <i class="fa fa-search"></i>
+          &nbsp;
+          Search
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
 <table class="table table-bordered table-responsive table-striped">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Email</th>
-      <th>Gender</th>
-      <th>Age</th>
-      <th>Points of Interest</th>
-      <th></th>
+      <th>
+        <%= sort_link @q, :id, '#' %>
+      </th>
+      <th>
+        <%= sort_link @q, :email %>
+      </th>
+      <th>
+        Gender
+      </th>
+      <th>
+        <%= sort_link @q, :age %>
+      </th>
+      <th>
+        Points of Interest
+      </th>
+      <th>
+        <!-- Actions -->
+      </th>
     </tr>
   </thead>
   <tbody>
