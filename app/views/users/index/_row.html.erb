@@ -15,8 +15,15 @@
     <%= user.interests.map(&:name).join ', ' %>
   </td>
   <td>
+    <%=
+      link_to user_send_regards_path(user),
+        method: :post, class: 'btn btn-sm btn-primary',
+        data: { confirm: "Are you sure you want to send regards to #{user.email}" } do
+    %>
+      <i class="fa fa-inbox"></i>
+    <% end %>
     <% if can? :destroy, user %>
-      <%= link_to user, method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure you want to delete user #{user.email}" } do %>
+      <%= link_to user, method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "Are you sure you want to delete user #{user.email}" } do %>
         <i class="fa fa-trash"></i>
       <% end %>
     <% end %>

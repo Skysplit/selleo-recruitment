@@ -91,4 +91,41 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe "POST #send_regards" do
+    context "when user is signed out" do
+      it "should redirect to login page" do
+        delete :send_regards, params: { id: 1 }
+        expect(response).to redirect_to new_user_session_url
+      end
+    end
+
+    context "when user is signed in" do
+      before :each do
+        @jon = User.create email: 'jon@example.com'
+        @jane = User.create email: 'jane@example.com'
+        sign_in @jon
+      end
+
+      it "should use SendRegardsService when sending email" do
+        expect_any_instance_of(SendRegardsService).to receive(:call)
+        post :send_regards, params: { id: @jane.id }
+      end
+
+      it "should send email to user" do
+        deliveries = ActionMailer::Base.deliveries
+        expect {
+          post :send_regards, params: { id: @jane.id }
+        }.to change(deliveries, :count).by(1)
+        expect(deliveries.last['from'].to_s).to eq @jon.email
+        expect(deliveries.last['to'].to_s).to eq @jane.email
+      end
+
+      it "should redirect after email was sent" do
+        post :send_regards, params: { id: @jane.id }
+        expect(response).to redirect_to users_url
+        expect(flash[:notice]).to eq "User #{@jane.email} received your regards."
+      end
+    end
+  end
 end
