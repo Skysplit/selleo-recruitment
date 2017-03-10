@@ -18,5 +18,4 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body.encoded).to match('sends his regards')
     end
   end
-
 end
